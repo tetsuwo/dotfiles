@@ -4,13 +4,60 @@
 " @author Tetsuwo OISHI
 "
 
-" VARIABLES {{{
+" DEFAULT {{{
 " ----------------------------------------------------------------
-let mapleader = ","
+set nocompatible
+filetype off
+filetype plugin indent off
+" }}}
+
+" SET VARS {{{
+" ----------------------------------------------------------------
+let s:is_win = has('win32') || has('win64')
+let s:is_mac = has('mac')
 " }}}
 
 " BASIC SETTING {{{
 " ----------------------------------------------------------------
+" Note: Skip initialization for vim-tiny or vim-small.
+if 0 | endif
+
+if has('vim_starting')
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
+
+  " Required:
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" My Bundles here:
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
+NeoBundle 'tetsuwo/unchi.vim'
+NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'editorconfig/editorconfig-vim'
+
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+" }}}
+
+" BASIC SETTING {{{
+" ----------------------------------------------------------------
+let mapleader = ","
 syntax on
 set runtimepath+=~/.vim/
 set number           " indicate line number
@@ -28,7 +75,7 @@ set whichwrap=b,s,h,l,<,>,[,]  " 行頭行末でカーソルを止めない
 
 " COLOR SCHEME {{{
 " ----------------------------------------------------------------
-let g:jellybeans_italic=0
+"let g:jellybeans_italic=0
 colorscheme jellybeans
 " }}}
 
@@ -60,4 +107,10 @@ autocmd BufWritePost *.php call PHPLint()
 autocmd BufNewFile,BufRead *.twig set filetype=php
 " }}}
 
-" vim:foldmethod=marker:foldlevel=0
+" VIMDIFF SETTING {{{
+" ----------------------------------------------------------------
+"highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
+"highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
+"highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
+"highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
+" }}}
