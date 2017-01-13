@@ -11,6 +11,10 @@ Thumbs.db
 
 # 監視対象内
 
+## bash
+!/.bash_profile
+!/.bashrc
+
 ## vim
 !/.gvimrc
 !/.vim
