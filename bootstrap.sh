@@ -22,6 +22,10 @@ echo "Linking .gitconfig"
 ln -snf $HOME/dotfiles/.gitconfig $HOME/.gitconfig
 echo "Linked"
 
+echo "Linking .gemrc"
+ln -snf $HOME/dotfiles/.gemrc $HOME/.gemrc
+echo "Linked"
+
 #echo "Linking .vim directory"
 #ln -snf $HOME/dotfiles/.vim/ $HOME/
 
