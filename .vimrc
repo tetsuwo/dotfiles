@@ -68,6 +68,7 @@ set autoindent       " インデントを現在行と同一化
 set cindent          " C言語型インデント
 set smartindent      " 新しい行は自動インデント
 "set noswapfile       " swapを作らない
+set noundofile
 set nobackup         " backupを作らない
 set listchars=eol:$,tab:>\ ,extends:< 
 set whichwrap=b,s,h,l,<,>,[,]  " 行頭行末でカーソルを止めない
