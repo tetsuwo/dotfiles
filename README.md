@@ -2,27 +2,28 @@ dotfiles
 ========
 
 
-1. Download
+### 1. Download
 
 ```
 ~$ git clone git@github.com:tetsuwo/dotfiles.git ~/dotfiles
-
- or
-
+  or
 ~$ git clone https://github.com/tetsuwo/dotfiles.git ~/dotfiles
 ```
 
-2. Install
+
+### 2. Install
 
 ```
 ~$ cd ~
-~$ sh dotfiles/bootstrap.sh
+~$ sh dotfiles/scripts/install.sh
 ```
 
-3. Update
+
+### 3. Update
 
 ```
 ~$ cd ~
-~$ sh dotfiles/link.sh
+~$ sh dotfiles/scripts/update.sh
 ```
+
 

@@ -34,7 +34,7 @@ Thumbs.db
 
 # etc.
 !/README.md
-!/bootstrap.sh
+!/scripts/
 
 # さらに開始対象外
 /.vim/bundle
