@@ -44,6 +44,11 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'tetsuwo/unchi.vim'
 NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'editorconfig/editorconfig-vim'
+NeoBundle 'tpope/vim-fugitive'
+"NeoBundle 'Shougo/unite.vim'
+"NeoBundle 'scrooloose/nerdtree'
+"NeoBundle 'Shougo/neocomplete.vim'
+"NeoBundle 'Shougo/neocomplcache.vim'
 
 call neobundle#end()
 
@@ -71,6 +76,7 @@ set smartindent      " 新しい行は自動インデント
 set nobackup         " backupを作らない
 set listchars=eol:$,tab:>\ ,extends:< 
 set whichwrap=b,s,h,l,<,>,[,]  " 行頭行末でカーソルを止めない
+set ambiwidth=double
 " }}}
 
 " COLOR SCHEME {{{
@@ -114,3 +120,31 @@ autocmd BufNewFile,BufRead *.twig set filetype=php
 "highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
 "highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
 " }}}
+
+
+if neobundle#is_installed('unite.vim')
+  " http://blog.remora.cx/2010/12/vim-ref-with-unite.html
+  """"""""""""""""""""""""""""""
+  " Unit.vimの設定
+  """"""""""""""""""""""""""""""
+  " 入力モードで開始する
+  let g:unite_enable_start_insert=1
+  " バッファ一覧
+  noremap <C-P> :Unite buffer<CR>
+  " ファイル一覧
+  noremap <C-N> :Unite -buffer-name=file file<CR>
+  " 最近使ったファイルの一覧
+  noremap <C-Z> :Unite file_mru<CR>
+  " sourcesを「今開いているファイルのディレクトリ」とする
+  noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
+  " ウィンドウを分割して開く
+  au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+  au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+  " ウィンドウを縦に分割して開く
+  au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+  au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+  " ESCキーを2回押すと終了する
+  au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+  au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+  """"""""""""""""""""""""""""""
+endif
