@@ -29,9 +29,12 @@ Thumbs.db
 ## hg
 !/.hgrc
 
+## others
+!/.gemrc
+
 # etc.
 !/README.md
-!/bootstrap.sh
+!/scripts/
 
 # さらに開始対象外
 /.vim/bundle
