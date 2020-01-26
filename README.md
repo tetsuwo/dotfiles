@@ -27,3 +27,15 @@ dotfiles
 ```
 
 
+### 4. Others
+
+Install `phpmd`
+
+```
+composer global require "phpmd/phpmd"
+```
+
+※ パスが通ってなかったら通す
+
+
+

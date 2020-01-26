@@ -19,40 +19,53 @@ let s:is_mac = has('mac')
 
 " BASIC SETTING {{{
 " ----------------------------------------------------------------
-" Note: Skip initialization for vim-tiny or vim-small.
-if 0 | endif
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
+" Support
+Plug 'nanotech/jellybeans.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-fugitive'
 
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
+" JavaScript
+Plug 'mxw/vim-jsx'
+Plug 'posva/vim-vue'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+" PHP
+"Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
+"Plug 'vim-scripts/php_localvarcheck.vim'
+"Plug 'vim-scripts/errormarker.vim'
+Plug 'vim-syntastic/syntastic'
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+" Go
+" neovim の警告が五月蝿い
+"Plug 'fatih/vim-go'
 
-" My Bundles here:
-" Refer to |:NeoBundle-examples|.
-" Note: You don't set neobundle setting in .gvimrc!
-NeoBundle 'tetsuwo/unchi.vim'
-NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'editorconfig/editorconfig-vim'
+" Docker
+Plug 'ekalinin/Dockerfile.vim'
 
-call neobundle#end()
+" Nginx
+Plug 'chr4/nginx.vim'
+
+" Markdown
+Plug 'plasticboy/vim-markdown'
+
+" SCSS
+Plug 'cakebaker/scss-syntax.vim'
+
+" Practice
+Plug 'tetsuwo/unchi.vim'
+
+" Initialize plugin system
+call plug#end()
 
 " Required:
 filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
 " }}}
 
 " BASIC SETTING {{{
@@ -94,20 +107,6 @@ filetype on
 set tags=./tags,./../tags,./*/tags,./../../tags,./../../../tags,./../../../../tags,./../../../../../tags
 " }}}
 
-" FUNCTION SETTING {{{
-" ----------------------------------------------------------------
-function! PHPLint()
-    let result = system( &ft . ' -l ' . bufname(""))
-    echo result
-endfunction
-" }}}
-
-" EACH FILE SETTING {{{
-" ----------------------------------------------------------------
-autocmd BufWritePost *.php call PHPLint()
-autocmd BufNewFile,BufRead *.twig set filetype=php
-" }}}
-
 " VIMDIFF SETTING {{{
 " ----------------------------------------------------------------
 "highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
@@ -115,3 +114,33 @@ autocmd BufNewFile,BufRead *.twig set filetype=php
 "highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
 "highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
 " }}}
+
+" PHP SETTING {{{
+" ----------------------------------------------------------------
+" vim-syntastic/syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+"let g:syntastic_debug = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_php_phpmd_post_args='unusedcode'
+"let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+let g:syntastic_php_checkers = ['phpmd']
+" original
+function! PHPLint()
+    let result = system( &ft . ' -l ' . bufname(""))
+    echo result
+endfunction
+autocmd BufWritePost *.php call PHPLint()
+autocmd BufNewFile,BufRead *.twig set filetype=php
+" }}}
+
+" MARKDOWN SETTING {{{
+" ----------------------------------------------------------------
+" plasticboy/vim-markdown
+let g:vim_markdown_folding_disabled = 1
+" }}}
+
