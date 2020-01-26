@@ -85,6 +85,7 @@ set noundofile
 set nobackup         " backupを作らない
 set listchars=eol:$,tab:>\ ,extends:< 
 set whichwrap=b,s,h,l,<,>,[,]  " 行頭行末でカーソルを止めない
+set ambiwidth=double
 " }}}
 
 " COLOR SCHEME {{{
